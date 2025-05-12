@@ -1,0 +1,64 @@
+﻿<Window x:Class="NorthvilleUI.Forms.UserForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NorthvilleUI.Forms"
+        mc:Ignorable="d"
+        Height="550" Width="500"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="{StaticResource PrimaryBackgroundBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Grid Grid.Row="0" Background="{StaticResource SecondaryBackgroundBrush}">
+            <TextBlock x:Name="lblFormTitle"
+                       Text="Add New User"
+                       FontFamily="Inter"
+                       FontWeight="Bold"
+                       FontSize="22"
+                       Foreground="{StaticResource DarkerTextBrush}"
+                       VerticalAlignment="Center"
+                       Margin="25,0"/>
+        </Grid>
+
+        <!-- Form Content -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="30,20">
+            <StackPanel>
+
+                <Border Style="{StaticResource SectionCardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="User Details" Style="{StaticResource SectionHeaderStyle}"/>
+
+                        <TextBlock Text="User ID" Style="{StaticResource FormLabelStyle}"/>
+                        <TextBox x:Name="txtUserId" Style="{StaticResource FormFieldStyle}"/>
+
+                        <TextBlock Text="Username" Style="{StaticResource FormLabelStyle}" Margin="0,10,0,0"/>
+                        <TextBox x:Name="txtUsername" Style="{StaticResource FormFieldStyle}"/>
+
+                        <TextBlock Text="Password" Style="{StaticResource FormLabelStyle}" Margin="0,10,0,0"/>
+                        <TextBox x:Name="txtPassword" Style="{StaticResource FormFieldStyle}"/>
+
+                        <TextBlock Text="User Role" Style="{StaticResource FormLabelStyle}" Margin="0,10,0,0"/>
+                        <ComboBox x:Name="cbUserRole" Style="{StaticResource ComboBoxStyle}" FontSize="14" Height="40"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Footer Buttons -->
+        <Grid Grid.Row="2" Background="{StaticResource SecondaryBackgroundBrush}">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="25,0">
+                <Button x:Name="btnCancel" Content="Cancel" Style="{StaticResource SecondaryButtonStyle}" Width="120" Margin="0,0,15,0" Click="btnCancel_Click"/>
+                <Button x:Name="btnSaveUser" Content="Save User" Style="{StaticResource ActionButtonStyle}" Width="160" Click="btnSaveUser_Click"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

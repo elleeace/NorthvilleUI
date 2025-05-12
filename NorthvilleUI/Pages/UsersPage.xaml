@@ -1,0 +1,234 @@
+﻿<Page x:Class="NorthvilleUI.Pages.UsersPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:NorthvilleUI.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="1040"
+      Title="DashboardPagexaml">
+
+    <Grid Background="{StaticResource PrimaryBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+        <!-- Quick Actions Panel -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="25,20,25,10">
+            <Button x:Name="btnAdddUser" Style="{StaticResource ActionButton}" Width="160" Margin="0,0,10,0" Click="btnAddUser">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="&#xE8A7;" FontFamily="Segoe MDL2 Assets" FontSize="14" 
+                            VerticalAlignment="Center" Margin="0,0,8,0"/>
+                    <TextBlock Text="Add User" FontSize="13"/>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="btnEditUser" Style="{StaticResource ActionButton}" Width="160" Margin="10,0,10,0" Click="btnEditUser_Click">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="&#xE8FF;" FontFamily="Segoe MDL2 Assets" FontSize="14" 
+                            VerticalAlignment="Center" Margin="0,0,8,0"/>
+                    <TextBlock Text="Edit User Info" FontSize="13"/>
+                </StackPanel>
+            </Button>
+
+            <Button  x:Name="btnDeleteUser"  Style="{StaticResource ActionButton}" Background="{StaticResource AccentBrush1}" Width="160" Margin="10,0,10,0" Click="btnDeleteUser_Click">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="&#xE8C9;" FontFamily="Segoe MDL2 Assets" FontSize="14" 
+                            VerticalAlignment="Center" Margin="0,0,8,0"/>
+                    <TextBlock Text="Delete User" FontSize="13"/>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="btnViewUsers" Style="{StaticResource ActionButton}" Background="{StaticResource AccentBrush3Alt}" 
+                 Foreground="{StaticResource DarkerTextBrush}" Width="160" Margin="10,0,0,0" Click="btnViewUsers_Click">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="&#xE71D;" FontFamily="Segoe MDL2 Assets" FontSize="14" 
+                            VerticalAlignment="Center" Margin="0,0,8,0"/>
+                    <TextBlock Text="View Users" FontSize="13"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+
+        <!-- Dashboard Content -->
+        <Grid Grid.Row="2" Margin="15,0,15,15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Stats Cards -->
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Books Status Card -->
+                <Border Grid.Column="0" Style="{StaticResource DataCard}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0" Background="{StaticResource AccentBrush3}" Width="50" Height="50" 
+                             CornerRadius="25" VerticalAlignment="Top">
+                            <TextBlock Text="&#xE82D;" FontFamily="Segoe MDL2 Assets" FontSize="22" 
+                                  Foreground="{StaticResource DarkerTextBrush}" 
+                                  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                        <StackPanel Grid.Column="1" Margin="15,0,0,0">
+                            <TextBlock Text="Total Admins" Foreground="{StaticResource TextBrush}" 
+                                  FontSize="14" FontFamily="Inter"/>
+                            <TextBlock Text="1" Foreground="{StaticResource DarkerTextBrush}" 
+                                  FontSize="22" FontWeight="Bold" FontFamily="Inter" Margin="0,5,0,0"/>
+                            <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                                <TextBlock Text="Lead: " Foreground="{StaticResource TextBrush}" 
+                                      FontSize="12" FontFamily="Inter"/>
+                                <TextBlock Text="Sheree Ortega" Foreground="{StaticResource AccentBrush2}" 
+                                      FontSize="12" FontWeight="SemiBold" FontFamily="Inter"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <!-- Borrowed Books Card -->
+                <Border Grid.Column="1" Style="{StaticResource DataCard}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0" Background="{StaticResource AccentBrush3Alt}" Width="50" Height="50" 
+                             CornerRadius="25" VerticalAlignment="Top">
+                            <TextBlock Text="&#xE8A5;" FontFamily="Segoe MDL2 Assets" FontSize="22" 
+                                  Foreground="{StaticResource DarkerTextBrush}" 
+                                  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                        <StackPanel Grid.Column="1" Margin="15,0,0,0">
+                            <TextBlock Text="Total Librarians" Foreground="{StaticResource TextBrush}" 
+                                  FontSize="14" FontFamily="Inter"/>
+                            <TextBlock Text="2" Foreground="{StaticResource DarkerTextBrush}" 
+                                  FontSize="22" FontWeight="Bold" FontFamily="Inter" Margin="0,5,0,0"/>
+                            <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                                <TextBlock Text="Lead: " Foreground="{StaticResource TextBrush}" 
+                                      FontSize="12" FontFamily="Inter"/>
+                                <TextBlock Text="Athena Sullano" Foreground="{StaticResource AccentBrush1}" 
+                                      FontSize="12" FontWeight="SemiBold" FontFamily="Inter"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <!-- Students Card -->
+                <Border Grid.Column="2" Style="{StaticResource DataCard}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0" Background="{StaticResource AccentBrush3}" Width="50" Height="50" 
+                             CornerRadius="25" VerticalAlignment="Top">
+                            <TextBlock Text="&#xE77B;" FontFamily="Segoe MDL2 Assets" FontSize="22" 
+                                  Foreground="{StaticResource DarkerTextBrush}" 
+                                  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                        <StackPanel Grid.Column="1" Margin="15,0,0,0">
+                            <TextBlock Text="Total Clerical Assistants" Foreground="{StaticResource TextBrush}" 
+                                  FontSize="14" FontFamily="Inter"/>
+                            <TextBlock Text="2" Foreground="{StaticResource DarkerTextBrush}" 
+                                  FontSize="22" FontWeight="Bold" FontFamily="Inter" Margin="0,5,0,0"/>
+                            <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                                <TextBlock Text="Lead: " Foreground="{StaticResource TextBrush}" 
+                                      FontSize="12" FontFamily="Inter"/>
+                                <TextBlock Text="Sopas" Foreground="{StaticResource AccentBrush2}" 
+                                      FontSize="12" FontWeight="SemiBold" FontFamily="Inter"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <!-- Fines Card -->
+                <Border Grid.Column="3" Style="{StaticResource DataCard}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0" Background="{StaticResource AccentBrush1}" Width="50" Height="50" 
+                             CornerRadius="25" VerticalAlignment="Top" Opacity="0.8">
+                            <TextBlock Text="&#xE8C9;" FontFamily="Segoe MDL2 Assets" FontSize="22" 
+                                  Foreground="White" 
+                                  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                        <StackPanel Grid.Column="1" Margin="15,0,0,0">
+                            <TextBlock Text="Total Studdents" Foreground="{StaticResource TextBrush}" 
+                                  FontSize="14" FontFamily="Inter"/>
+                            <TextBlock Text="25" Foreground="{StaticResource DarkerTextBrush}" 
+                                  FontSize="22" FontWeight="Bold" FontFamily="Inter" Margin="0,5,0,0"/>
+                            <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                                <TextBlock Text="Active: " Foreground="{StaticResource TextBrush}" 
+                                      FontSize="12" FontFamily="Inter"/>
+                                <TextBlock Text="12" Foreground="{StaticResource AccentBrush2}" 
+                                      FontSize="12" FontWeight="SemiBold" FontFamily="Inter"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <!-- Main Dashboard Content Tabs -->
+            <Grid Grid.Row="2" Margin="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <!-- Tabs -->
+                    <RowDefinition Height="*"/>
+                    <!-- Filters -->
+                </Grid.RowDefinitions>
+
+                <TextBlock x:Name="tbTableName" Grid.Row="0" Text="Table Name" FontSize="20" FontWeight="Bold" 
+              FontFamily="Inter" Foreground="{StaticResource DarkerTextBrush}" 
+              VerticalAlignment="Center"/>
+
+                <!-- Row 1: Filters/Search -->
+                <Grid Grid.Row="1" Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Search Bar -->
+                    <Border Grid.Column="0" Background="White" CornerRadius="4" Padding="10,0"/>
+
+                    <!-- Filters -->
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="10,0,0,0"/>
+                </Grid>
+
+                <DataGrid x:Name="dgMainTable"
+                       Grid.Row="2"
+                       AutoGenerateColumns="True"
+                       IsReadOnly="True"
+                       AlternatingRowBackground="#F7F9FA"
+                       GridLinesVisibility="All"
+                       Padding="0"
+                       Background="White"
+                       Foreground="{StaticResource DarkerTextBrush}"
+                       FontFamily="Inter"
+                       FontSize="13"
+                       HeadersVisibility="Column"
+                       BorderThickness="0"
+                       RowHeaderWidth="0">
+                    <DataGrid.Columns>
+
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </Grid>
+
+        </Grid>
+    </Grid>
+</Page>

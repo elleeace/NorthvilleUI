@@ -1,0 +1,133 @@
+﻿<Page x:Class="NorthvilleUI.Pages.StudentsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:NorthvilleUI.Pages"
+      mc:Ignorable="d" 
+           d:DesignHeight="700" d:DesignWidth="1040"
+      Title="Students Page">
+
+    <Grid Background="{StaticResource PrimaryBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+        <!-- Quick Actions Panel -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="25,20,25,10">
+            <Button x:Name="btnAddStudent" Style="{StaticResource ActionButton}" Width="160" Margin="0,0,10,0" Click="btnAddStudent_Click">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="&#xE8A7;" FontFamily="Segoe MDL2 Assets" FontSize="14" 
+                            VerticalAlignment="Center" Margin="0,0,8,0"/>
+                    <TextBlock Text="Add Student" FontSize="13"/>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="btnEditStudent" Style="{StaticResource ActionButton}" Width="160" Margin="10,0,10,0" Click="btnEditStudent_Click">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="&#xE8FF;" FontFamily="Segoe MDL2 Assets" FontSize="14" 
+                            VerticalAlignment="Center" Margin="0,0,8,0"/>
+                    <TextBlock Text="Edit Student Info" FontSize="13"/>
+                </StackPanel>
+            </Button>
+
+            <Button  x:Name="btnDeleteStudent"  Style="{StaticResource ActionButton}" Background="{StaticResource AccentBrush1}" Width="160" Margin="10,0,10,0" Click="btnDeleteStudent_Click">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="&#xE8C9;" FontFamily="Segoe MDL2 Assets" FontSize="14" 
+                            VerticalAlignment="Center" Margin="0,0,8,0"/>
+                    <TextBlock Text="Delete Student" FontSize="13"/>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="btnViewStudents" Style="{StaticResource ActionButton}" Background="{StaticResource AccentBrush3Alt}" 
+                 Foreground="{StaticResource DarkerTextBrush}" Width="160" Margin="10,0,0,0" Click="btnViewStudents_Click">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="&#xE71D;" FontFamily="Segoe MDL2 Assets" FontSize="14" 
+                            VerticalAlignment="Center" Margin="0,0,8,0"/>
+                    <TextBlock Text="View Students" FontSize="13"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+
+        <!-- Dashboard Content -->
+        <Grid Grid.Row="2" Margin="15,0,15,15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Main Dashboard Content Tabs -->
+            <Grid Grid.Row="2" Margin="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <!-- Tabs -->
+                    <RowDefinition Height="*"/>
+                    <!-- Filters -->
+                </Grid.RowDefinitions>
+
+                <TextBlock x:Name="tbTableName" Grid.Row="0" Text="Table Name" FontSize="20" FontWeight="Bold" 
+              FontFamily="Inter" Foreground="{StaticResource DarkerTextBrush}" 
+              VerticalAlignment="Center"/>
+
+                <!-- Row 1: Filters/Search -->
+                <Grid Grid.Row="1" Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Search Bar -->
+                    <Border Grid.Column="0" Background="White" CornerRadius="4" Padding="10,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="&#xE721;" FontFamily="Segoe MDL2 Assets"
+                    FontSize="14" VerticalAlignment="Center" Foreground="#AAAAAA"/>
+                            <TextBox Grid.Column="1" BorderThickness="0" Margin="8,0,0,0"
+                  VerticalAlignment="Center" Padding="0,8"
+                  FontFamily="Inter" FontSize="13"
+                  Text="Search by book title, author, genre..."/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Filters -->
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="10,0,0,0">
+                        <ComboBox Width="150" Padding="8" FontFamily="Inter" FontSize="13">
+                            <ComboBoxItem Content="Search By" IsSelected="True"/>
+                            <ComboBoxItem Content="Title"/>
+                            <ComboBoxItem Content="Autho"/>
+                            <ComboBoxItem Content="Genre"/>
+                        </ComboBox>
+                    </StackPanel>
+                </Grid>
+
+                <DataGrid x:Name="dgMainTable"
+                       Grid.Row="2"
+                       AutoGenerateColumns="True"
+                       IsReadOnly="True"
+                       AlternatingRowBackground="#F7F9FA"
+                       GridLinesVisibility="All"
+                       Padding="0"
+                       Background="White"
+                       Foreground="{StaticResource DarkerTextBrush}"
+                       FontFamily="Inter"
+                       FontSize="13"
+                       HeadersVisibility="Column"
+                       BorderThickness="0"
+                       RowHeaderWidth="0">
+                    <DataGrid.Columns>
+
+                       
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </Grid>
+
+        </Grid>
+    </Grid>
+</Page>

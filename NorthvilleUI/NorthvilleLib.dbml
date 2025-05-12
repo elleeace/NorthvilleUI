@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Northville" Class="NorthvilleLibDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-8PKLPN0\SQLEXPRESS;Initial Catalog=Northville;User ID=sopas;Encrypt=False;Trust Server Certificate=True" SettingsObjectName="NorthvilleUI.Properties.Settings" SettingsPropertyName="NorthvilleConnectionString1" Provider="System.Data.SqlClient" />
+  <Table Name="NorthvilleLib.Authors" Member="Authors">
+    <Type Name="Author">
+      <Column Name="author_id" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="author_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="Author_Book" Member="Books" ThisKey="author_id" OtherKey="author_id" Type="Book" />
+    </Type>
+  </Table>
+  <Table Name="NorthvilleLib.Book_Copies" Member="Book_Copies">
+    <Type Name="Book_Copy">
+      <Column Name="copy_id" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="book_id" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="copy_status" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="date_added" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="Book_Copy_Borrow_Transaction" Member="Borrow_Transactions" ThisKey="copy_id" OtherKey="copy_id" Type="Borrow_Transaction" />
+      <Association Name="Book_Book_Copy" Member="Book" ThisKey="book_id" OtherKey="book_id" Type="Book" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="NorthvilleLib.Books" Member="Books">
+    <Type Name="Book">
+      <Column Name="book_id" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="book_isbn" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="book_title" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="book_publication_year" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="genre_id" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="author_id" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="book_publisher" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Association Name="Book_Book_Copy" Member="Book_Copies" ThisKey="book_id" OtherKey="book_id" Type="Book_Copy" />
+      <Association Name="Author_Book" Member="Author" ThisKey="author_id" OtherKey="author_id" Type="Author" IsForeignKey="true" />
+      <Association Name="Genre_Book" Member="Genre" ThisKey="genre_id" OtherKey="genre_id" Type="Genre" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="NorthvilleLib.Borrow_Transactions" Member="Borrow_Transactions">
+    <Type Name="Borrow_Transaction">
+      <Column Name="transaction_id" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="student_id" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="copy_id" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="borrow_date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="due_date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="return_date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="Borrow_Transaction_Fine" Member="Fines" ThisKey="transaction_id" OtherKey="transaction_id" Type="Fine" />
+      <Association Name="Book_Copy_Borrow_Transaction" Member="Book_Copy" ThisKey="copy_id" OtherKey="copy_id" Type="Book_Copy" IsForeignKey="true" />
+      <Association Name="Student_Borrow_Transaction" Member="Student" ThisKey="student_id" OtherKey="student_id" Type="Student" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="NorthvilleLib.Courses" Member="Courses">
+    <Type Name="Course">
+      <Column Name="course_id" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="course_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="department" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Course_Student" Member="Students" ThisKey="course_id" OtherKey="course_id" Type="Student" />
+    </Type>
+  </Table>
+  <Table Name="NorthvilleLib.Fines" Member="Fines">
+    <Type Name="Fine">
+      <Column Name="fine_id" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="transaction_id" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="fine_amount" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="fine_status" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="Fine_Payment" Member="Payments" ThisKey="fine_id" OtherKey="fine_id" Type="Payment" />
+      <Association Name="Borrow_Transaction_Fine" Member="Borrow_Transaction" ThisKey="transaction_id" OtherKey="transaction_id" Type="Borrow_Transaction" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="NorthvilleLib.Genres" Member="Genres">
+    <Type Name="Genre">
+      <Column Name="genre_id" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="genre_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Genre_Book" Member="Books" ThisKey="genre_id" OtherKey="genre_id" Type="Book" />
+    </Type>
+  </Table>
+  <Table Name="NorthvilleLib.Library_Visits" Member="Library_Visits">
+    <Type Name="Library_Visit">
+      <Column Name="visit_id" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="student_id" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="visit_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="Student_Library_Visit" Member="Student" ThisKey="student_id" OtherKey="student_id" Type="Student" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="NorthvilleLib.Payments" Member="Payments">
+    <Type Name="Payment">
+      <Column Name="payment_id" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fine_id" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="student_id" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="payment_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="payment_amount" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="payment_method" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="receipt_number" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Fine_Payment" Member="Fine" ThisKey="fine_id" OtherKey="fine_id" Type="Fine" IsForeignKey="true" />
+      <Association Name="Student_Payment" Member="Student" ThisKey="student_id" OtherKey="student_id" Type="Student" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="NorthvilleLib.Students" Member="Students">
+    <Type Name="Student">
+      <Column Name="student_id" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="student_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="student_email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="student_phone" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="course_id" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="student_status" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="Student_Borrow_Transaction" Member="Borrow_Transactions" ThisKey="student_id" OtherKey="student_id" Type="Borrow_Transaction" />
+      <Association Name="Student_Library_Visit" Member="Library_Visits" ThisKey="student_id" OtherKey="student_id" Type="Library_Visit" />
+      <Association Name="Student_Payment" Member="Payments" ThisKey="student_id" OtherKey="student_id" Type="Payment" />
+      <Association Name="Course_Student" Member="Course" ThisKey="course_id" OtherKey="course_id" Type="Course" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="NorthvilleLib.AvailableBooks" Member="AvailableBooks">
+    <Type Name="AvailableBook">
+      <Column Name="book_id" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="book_title" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="book_isbn" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="author_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="genre_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="book_publisher" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="book_publication_year" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="available_copies" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="copy_ids" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="NorthvilleLib.OverdueBooks" Member="OverdueBooks">
+    <Type Name="OverdueBook">
+      <Column Name="transaction_id" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="student_id" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="student_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="book_id" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="book_title" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="copy_id" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="borrow_date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="due_date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="days_overdue" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="calculated_fine" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
+      <Column Name="current_fine" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
+      <Column Name="fine_status" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="NorthvilleLib.FineBalances" Member="FineBalances">
+    <Type Name="FineBalance">
+      <Column Name="fine_id" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="transaction_id" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="student_id" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="student_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="book_title" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="original_fine" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="amount_paid" Type="System.Decimal" DbType="Decimal(38,2) NOT NULL" CanBeNull="false" />
+      <Column Name="balance_remaining" Type="System.Decimal" DbType="Decimal(38,2)" CanBeNull="true" />
+      <Column Name="payment_status" Type="System.String" DbType="VarChar(14) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="NorthvilleLib.StudentFinesSummary" Member="StudentFinesSummaries">
+    <Type Name="StudentFinesSummary">
+      <Column Name="student_id" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="student_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="student_email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="student_phone" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="course_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="outstanding_balance" Type="System.Decimal" DbType="Decimal(38,2)" CanBeNull="true" />
+      <Column Name="active_fines" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="NorthvilleLib.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="user_id" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="username" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="user_role" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Function Name="NorthvilleLib.usp_ProcessBookCheckout" Method="usp_ProcessBookCheckout">
+    <Parameter Name="student_id" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="book_id" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="due_days" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="NorthvilleLib.usp_ReturnBook" Method="usp_ReturnBook">
+    <Parameter Name="transaction_id" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="actual_return_date" Type="System.DateTime" DbType="Date" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>
